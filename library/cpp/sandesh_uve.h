@@ -128,13 +128,13 @@ public:
         typename uve_type_map::iterator imapentry =
             omapentry->second.find(s);
         if (imapentry == omapentry->second.end()) {
-            std::auto_ptr<UVEMapEntry> ume(new UVEMapEntry(data.table_, seqnum));
+            std::unique_ptr<UVEMapEntry> ume(new UVEMapEntry(data.table_, seqnum));
             send = T::UpdateUVE(data, ume->data);
             omapentry->second.insert(s, ume);
         } else {
             if (imapentry->second->data.get_deleted()) {
                 omapentry->second.erase(imapentry);
-                std::auto_ptr<UVEMapEntry> ume(new UVEMapEntry(
+                std::unique_ptr<UVEMapEntry> ume(new UVEMapEntry(
                     data.table_, seqnum));
                 send = T::UpdateUVE(data, ume->data);
                 omapentry->second.insert(s, ume);

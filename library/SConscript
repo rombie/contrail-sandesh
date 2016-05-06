@@ -6,6 +6,7 @@
 
 Import('SandeshEnv');
 
+# SandeshEnv.Append(CCFLAGS = '-std=c++11')
 SConscript('common/SConscript', exports='SandeshEnv', duplicate = 0)
 test_suite = SConscript('cpp/SConscript', exports='SandeshEnv', duplicate = 0)
 test_suite += SConscript('c/SConscript', exports='SandeshEnv', duplicate = 0)

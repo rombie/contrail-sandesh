@@ -49,7 +49,7 @@ bool Sandesh::connect_to_collector_ = false;
 bool Sandesh::disable_flow_collection_ = false;
 SandeshLevel::type Sandesh::sending_level_ = SandeshLevel::INVALID;
 SandeshClient *Sandesh::client_ = NULL;
-std::auto_ptr<Sandesh::SandeshRxQueue> Sandesh::recv_queue_;
+std::unique_ptr<Sandesh::SandeshRxQueue> Sandesh::recv_queue_;
 std::string Sandesh::module_;
 std::string Sandesh::source_;
 std::string Sandesh::node_type_;

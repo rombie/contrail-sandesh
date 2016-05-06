@@ -9,7 +9,7 @@ Import('SandeshEnv')
 
 env = SandeshEnv.Clone();
 
-rmflags = ['-Wsign-compare', '-Werror', '-fno-exceptions',
+rmflags = ['-std=c++11', ',-Wsign-compare', '-Werror', '-fno-exceptions',
            '--coverage']
 
 cflags = env['CCFLAGS']

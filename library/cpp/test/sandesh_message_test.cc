@@ -110,8 +110,8 @@ protected:
 
     uint32_t msg_num_;
     SandeshServerTest *server_;
-    std::auto_ptr<ServerThread> thread_;
-    std::auto_ptr<EventManager> evm_;
+    std::unique_ptr<ServerThread> thread_;
+    std::unique_ptr<EventManager> evm_;
 };
 
 class SandeshAsyncTest : public ::testing::Test {
@@ -267,8 +267,8 @@ protected:
 
     uint32_t msg_num_;
     SandeshServerTest *server_;
-    std::auto_ptr<ServerThread> thread_;
-    std::auto_ptr<EventManager> evm_;
+    std::unique_ptr<ServerThread> thread_;
+    std::unique_ptr<EventManager> evm_;
 };
 
 TEST_F(SandeshAsyncTest, Async) {
@@ -753,8 +753,8 @@ protected:
     }
 
     uint32_t msg_num_;
-    std::auto_ptr<ServerThread> thread_;
-    std::auto_ptr<EventManager> evm_;
+    std::unique_ptr<ServerThread> thread_;
+    std::unique_ptr<EventManager> evm_;
     SandeshServerTest *server_;
 };
 
@@ -1054,8 +1054,8 @@ protected:
         return Sandesh::client()->ReceiveMsg(xml_msg, header, message_type, 0);
     }
 
-    std::auto_ptr<ServerThread> thread_;
-    std::auto_ptr<EventManager> evm_;
+    std::unique_ptr<ServerThread> thread_;
+    std::unique_ptr<EventManager> evm_;
     SandeshServerTest *server_;
 };
 

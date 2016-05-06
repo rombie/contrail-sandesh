@@ -4835,7 +4835,7 @@ void t_cpp_generator::generate_service_async_skeleton(t_service* tservice) {
   indent_up();
   f_skeleton <<
     indent() << svcname << "AsyncHandler() {" << endl <<
-    indent() << "  syncHandler_ = std::auto_ptr<" << svcname <<
+    indent() << "  syncHandler_ = std::unique_ptr<" << svcname <<
                 "Handler>(new " << svcname << "Handler);" << endl <<
     indent() << "  // Your initialization goes here" << endl <<
     indent() << "}" << endl;
@@ -4865,7 +4865,7 @@ void t_cpp_generator::generate_service_async_skeleton(t_service* tservice) {
   }
   f_skeleton << endl <<
     " protected:" << endl <<
-    indent() << "std::auto_ptr<" << svcname << "Handler> syncHandler_;" << endl;
+    indent() << "std::unique_ptr<" << svcname << "Handler> syncHandler_;" << endl;
   indent_down();
   f_skeleton <<
     "};" << endl << endl;
