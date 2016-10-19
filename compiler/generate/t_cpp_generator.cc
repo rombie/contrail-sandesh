@@ -1374,6 +1374,8 @@ void t_cpp_generator::generate_sandesh_async_creator_helper(ofstream &out, t_san
     out << generate_sandesh_async_creator(tsandesh, true, false, false, "", "", true, false, false, use_sandesh);
     out << " {" << endl;
     indent_up();
+    out << indent() << "if (getenv(\"CONTRAIL_SYSLOG_ASSERT_LEVEL\")) assert(level > atoi(getenv(\"CONTRAIL_SYSLOG_ASSERT_LEVEL\")));" << endl;
+    out << indent() << "if (getenv(\"CONTRAIL_SYSLOG_DISABLE\")) return;" << endl;
     out << indent() << "if (HandleTest(level, category)) {" << endl;
     indent_up();
     if (!is_flow) {
@@ -4203,6 +4205,7 @@ void t_cpp_generator::generate_sandesh_uve_creator(
         "& cdata, SandeshUVE::SendType stype, uint32_t seqno," <<
         " uint32_t cycle, std::string ctx) {" << endl;
     indent_up();
+    out << indent() << "if (getenv(\"CONTRAIL_UVE_DISABLE\")) return;" << endl;
     indent(out) << sname << " *snh = new " << sname << "(seqno, cdata);" << endl;
     indent(out) << "if (snh->LoadUVE(stype, cycle)) {" << endl;
     indent_up();
@@ -4220,6 +4223,7 @@ void t_cpp_generator::generate_sandesh_uve_creator(
         "& data, std::string table, uint64_t mono_usec) {" << endl;
     indent_up();
 
+    out << indent() << "if (getenv(\"CONTRAIL_UVE_DISABLE\")) return;" << endl;
     indent(out) << type_name((*f_iter)->get_type()) <<
         " & cdata = const_cast<" << type_name((*f_iter)->get_type()) <<
         " &>(data);" << endl;
@@ -4712,6 +4716,7 @@ void t_cpp_generator::generate_sandesh_trace(ofstream& out,
             generate_sandesh_no_static_const_string_function(tsandesh, true, false, true) <<
             " {" << endl;
     indent_up();
+    out << indent() << "if (getenv(\"CONTRAIL_TRACE_DISABLE\")) return;" << endl;
     out << indent() << "TraceSandeshType *trace = " << 
             "TraceSandeshType::GetInstance();" << endl;
     out << indent() << "if (trace != NULL && trace->IsTraceOn() && trace_buf->IsTraceOn()) {" << endl;
